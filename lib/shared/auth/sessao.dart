@@ -8,8 +8,12 @@ class Sessao extends ChangeNotifier {
   static final Sessao instance = _cache!.containsKey('name') ? Sessao.fromCache() : Sessao();
 
   String? user;
+  String? photoURL;
 
-  Sessao({this.user});
+  Sessao({
+    this.user,
+    this.photoURL,
+  });
 
   bool get logado {
     return user != null;
@@ -18,12 +22,14 @@ class Sessao extends ChangeNotifier {
   factory Sessao.fromCache() {
     return Sessao(
       user: _cache?.getString('name'),
+      photoURL: _cache?.getString('photoURL'),
     );
   }
 
-  void atualizarSessao({UserModel? json}) {
-    if (json != null) {
-      user = json.name;
+  void atualizarSessao({UserModel? user}) {
+    if (user != null) {
+      this.user = user.name;
+      photoURL = user.phothURL;
     }
 
     notifyListeners();
@@ -32,6 +38,7 @@ class Sessao extends ChangeNotifier {
 
   void logout() {
     user = null;
+    photoURL = null;
 
     _cache!.clear();
     notifyListeners();
@@ -40,7 +47,7 @@ class Sessao extends ChangeNotifier {
   gravarCache() {
     if (user != null) {
       _cache!.setString('name', user ?? '');
-      _cache!.setString('photoURL', user ?? '');
+      _cache!.setString('photoURL', photoURL ?? '');
     }
   }
 }
