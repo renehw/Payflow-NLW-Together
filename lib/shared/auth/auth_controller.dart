@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
   UserModel? _user;
-
+  static SharedPreferences? instance;
   UserModel get user => _user!;
 
   void setUser(BuildContext context, UserModel? user) {
@@ -17,20 +17,26 @@ class AuthController {
   }
 
   Future<void> saveUser(UserModel user) async {
-    final instance = await SharedPreferences.getInstance();
-    await instance.setString('user', user.toJson());
+    instance = await SharedPreferences.getInstance();
+    await instance!.setString('user', user.toJson());
 
     return;
   }
 
   Future<void> currentUser(BuildContext context) async {
-    final instance = await SharedPreferences.getInstance();
-    if (instance.containsKey('user')) {
-      final json = instance.get('user') as String;
+    instance = await SharedPreferences.getInstance();
+    Future.delayed(const Duration(seconds: 2));
+    if (instance!.containsKey('user')) {
+      final json = instance!.get('user') as String;
       setUser(context, UserModel.fromJson(json));
       return;
     } else {
       setUser(context, null);
+      return;
     }
   }
+
+  /* bool get usuarioLogado {
+    return user != null;
+  } */
 }

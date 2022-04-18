@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:payflow/shared/auth/app.dart';
 
 class UserModel {
-  final String name;
+  static final _cache = App.cache;
+  final String? name;
   final String? phothURL;
 
   UserModel({required this.name, this.phothURL});
@@ -18,4 +20,11 @@ class UserModel {
       };
 
   String toJson() => jsonEncode(toMap());
+
+  factory UserModel.fromCache() {
+    return UserModel(
+      name: _cache!.getString('name'),
+      phothURL: _cache!.getString('photoURL'),
+    );
+  }
 }

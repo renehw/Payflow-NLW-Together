@@ -1,10 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:payflow/app_widget.dart';
-import 'package:payflow/shared/auth/auth_controller.dart';
+import 'package:payflow/shared/auth/app.dart';
+import 'package:payflow/shared/auth/sessao.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const AppFirebase());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await App.instance.inicializar();
+
+  runApp(
+    MultiProvider(
+      child: const AppFirebase(),
+      providers: [
+        ChangeNotifierProvider(create: (context) => Sessao.instance),
+      ],
+    ),
+  );
 }
 
 class AppFirebase extends StatefulWidget {
@@ -32,8 +45,6 @@ class _AppFirebaseState extends State<AppFirebase> {
             ),
           );
         } else if (snapshot.connectionState == ConnectionState.done) {
-          final authController = AuthController();
-          authController.currentUser(context);
           return const AppWidget();
         } else {
           return const Material(
