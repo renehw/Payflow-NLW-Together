@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/extract/extract_page.dart';
 import 'package:payflow/modules/home/home_controller.dart';
+import 'package:payflow/modules/meus_boletos/meus_boletos_page.dart';
+import 'package:payflow/shared/auth/sessao.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Sessao user;
+  const HomePage({Key? key, required this.user}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -12,10 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
-  final pages = [
-    Container(color: Colors.red),
-    Container(color: Colors.blue),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                   text: 'Olá, ',
                   style: AppTextStyles.titleRegular,
                   children: [
-                    TextSpan(text: 'Renê', style: AppTextStyles.titleBoldBackground),
+                    TextSpan(text: '${widget.user.user}', style: AppTextStyles.titleBoldBackground),
                   ],
                 ),
               ),
@@ -46,13 +46,19 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(25.0),
+                  image: DecorationImage(
+                    image: NetworkImage(widget.user.photoURL!),
+                  ),
                 ),
               ),
             ),
           ),
         ),
       ),
-      body: pages[controller.currentPage],
+      body: [
+        MeusBoletosPage(key: UniqueKey()),
+        ExtractPage(key: UniqueKey()),
+      ][controller.currentPage],
       bottomNavigationBar: SizedBox(
         height: 90.0,
         child: Row(
@@ -69,8 +75,9 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             GestureDetector(
-              onTap: (() {
-                Navigator.pushNamed(context, '/barcode_scanner');
+              onTap: (() async {
+                await Navigator.pushNamed(context, '/barcode_scanner');
+                setState(() {});
               }),
               child: Container(
                 width: 56.0,

@@ -32,13 +32,15 @@ class AppWidget extends StatelessWidget {
           return const LoginPage();
         }
 
-        return const HomePage();
+        return HomePage(user: App.sessao);
       }),
       routes: {
-        '/home': (context) => const HomePage(),
+        '/home': (context) => HomePage(user: App.sessao),
         '/login': (context) => const LoginPage(),
         '/barcode_scanner': (context) => const BarcodeScannerPage(),
-        '/insert_boleto': (context) => const InsertBoletoPage(),
+        '/insert_boleto': (context) => InsertBoletoPage(
+              barcode: ModalRoute.of(context) != null ? ModalRoute.of(context)!.settings.arguments.toString() : null,
+            ),
       },
     );
   }
