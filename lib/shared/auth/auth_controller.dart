@@ -35,8 +35,4 @@ class AuthController {
       return;
     }
   }
-
-  /* bool get usuarioLogado {
-    return user != null;
-  } */
 }

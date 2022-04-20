@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:payflow/modules/home/home_controller.dart';
-import 'package:payflow/shared/auth/app.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             ),
             GestureDetector(
               onTap: (() {
-                print('clicou');
+                Navigator.pushNamed(context, '/barcode_scanner');
               }),
               child: Container(
                 width: 56.0,
@@ -80,12 +79,9 @@ class _HomePageState extends State<HomePage> {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.add_box_outlined,
-                    color: AppColors.background,
-                  ),
-                  onPressed: () {},
+                child: const Icon(
+                  Icons.add_box_outlined,
+                  color: AppColors.background,
                 ),
               ),
             ),
