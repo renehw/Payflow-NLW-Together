@@ -66,7 +66,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ### 📕 Bibliotecas
 
-Esse projeto foi utilizou das seguintes lib:
+Esse projeto foi desenvolvido utilizando as seguintes lib:
 
 - animated_card: ^2.0.0
 - camera: ^0.9.4+19
