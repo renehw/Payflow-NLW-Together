@@ -27,7 +27,7 @@ O projeto PayFlow foi desenvolvido na Next Level Week Together 💜💚 e se tra
 
 ### ✅ Demonstração
 <p>
-  <img src="" alt="PayFlow" />
+  <img src="https://github.com/renehw/Payflow-NLW-Together/blob/main/assets/images/capa.png" alt="PayFlow" />
 </p>
 
 ### 📎 Features
