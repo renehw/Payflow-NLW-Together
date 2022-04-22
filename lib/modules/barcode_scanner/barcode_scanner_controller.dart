@@ -22,7 +22,7 @@ class BarcodeScannerController {
       final camera = response.firstWhere(
         (element) => element.lensDirection == CameraLensDirection.back,
       );
-      cameraController = CameraController(camera, ResolutionPreset.max, enableAudio: false);
+      cameraController = CameraController(camera, ResolutionPreset.medium, enableAudio: false);
       await cameraController!.initialize();
       scanWithCamera();
       listenCamera();
@@ -56,7 +56,7 @@ class BarcodeScannerController {
 
       return;
     } catch (e) {
-      print('Erro de leitura $e');
+      throw Exception(e.toString());
     }
   }
 
@@ -103,7 +103,7 @@ class BarcodeScannerController {
 
             scannerBarCode(inputImageCamera);
           } catch (e) {
-            print(e);
+            throw Exception(e.toString());
           }
         }
       });

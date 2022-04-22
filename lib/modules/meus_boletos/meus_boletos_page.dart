@@ -14,7 +14,12 @@ class MeusBoletosPage extends StatefulWidget {
 }
 
 class _MeusBoletosPageState extends State<MeusBoletosPage> {
-  final controller = BoletoListController();
+  BoletoListController? controller;
+  @override
+  void initState() {
+    controller = BoletoListController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ValueListenableBuilder<List<BoletoModel>>(
-                  valueListenable: controller.boletosNotifier,
+                  valueListenable: controller!.boletosNotifier,
                   builder: (_, boletos, __) => BoletoInfoWidget(size: boletos.length),
                 ),
               ),
@@ -58,7 +63,7 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: BoletoListWidget(controller: controller),
+            child: BoletoListWidget(controller: controller!),
           ),
         ],
       ),

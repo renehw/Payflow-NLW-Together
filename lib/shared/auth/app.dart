@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:payflow/shared/auth/sessao.dart';
+import 'package:payflow/shared/widget/boleto_list/boleto_list_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class App {

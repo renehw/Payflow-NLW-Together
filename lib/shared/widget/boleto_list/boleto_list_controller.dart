@@ -16,7 +16,11 @@ class BoletoListController {
       final response = App.cache?.getStringList('boletos') ?? <String>[];
       boletos = response.map((e) => BoletoModel.fromJson(e)).toList();
     } catch (e) {
-      boletos = <BoletoModel>[];
+      throw Exception(e.toString());
     }
+  }
+
+  void dispose() {
+    boletosNotifier.dispose();
   }
 }

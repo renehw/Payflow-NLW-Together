@@ -36,11 +36,11 @@ class BoletoInfoWidget extends StatelessWidget {
                 style: AppTextStyles.captionBackground,
                 children: [
                   TextSpan(
-                    text: "$size boletos\n",
+                    text: size == 1 ? "$size boleto\n" : "$size boletos\n",
                     style: AppTextStyles.captionBoldBackground,
                   ),
                   TextSpan(
-                    text: "cadastrados para pagar",
+                    text: size == 1 ? "cadastrado para pagar" : "cadastrados para pagar",
                     style: AppTextStyles.captionBackground,
                   ),
                 ],

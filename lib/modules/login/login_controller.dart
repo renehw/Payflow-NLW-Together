@@ -19,7 +19,7 @@ class LoginController {
       App.sessao.atualizarSessao(user: user);
     } catch (e) {
       authController.setUser(context, null);
-      print(e);
+      throw Exception(e.toString());
     }
   }
 }

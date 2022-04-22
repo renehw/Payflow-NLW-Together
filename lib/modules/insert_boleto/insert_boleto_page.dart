@@ -25,7 +25,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
   @override
   void initState() {
     if (widget.barcode != null) {
-      barcodeInputTextController.text = widget.barcode!;
+      barcodeInputTextController.text = (widget.barcode!.contains('null') ? '' : widget.barcode)!;
     }
     super.initState();
   }
@@ -112,6 +112,9 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
         secondaryOnPressed: () async {
           await controller.cadastrarBoleto();
           Navigator.pop(context);
+          /* if (controller.formKey.currentState!.validate()) {
+            
+          } */
         },
       ),
     );
